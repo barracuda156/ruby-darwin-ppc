@@ -1862,11 +1862,11 @@ native_thread_native_thread_id(rb_thread_t *target_th)
 #elif defined(__APPLE__)
     uint64_t tid;
 # if (!defined(MAC_OS_X_VERSION_10_6) || \
-      (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_6) || \
+      (MAC_OS_X_VERSION_MAX_ALLOWED < 1060) || \
       defined(__POWERPC__) /* never defined for PowerPC platforms */)
     const bool no_pthread_threadid_np = true;
 #   define NO_PTHREAD_MACH_THREAD_NP 1
-# elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_6
+# elif MAC_OS_X_VERSION_MIN_REQUIRED >= 1060
     const bool no_pthread_threadid_np = false;
 # else
 #   if !(defined(__has_attribute) && __has_attribute(availability))

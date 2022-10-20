@@ -485,10 +485,10 @@ fill_random_bytes_urandom(void *seed, size_t size)
 #endif
 
 #if 0
-#elif defined MAC_OS_X_VERSION_10_7 && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_7
+#elif defined MAC_OS_X_VERSION_10_7 && MAC_OS_X_VERSION_MIN_REQUIRED >= 1070
 
 # if defined(USE_COMMON_RANDOM)
-# elif defined MAC_OS_X_VERSION_10_10 && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
+# elif defined MAC_OS_X_VERSION_10_10 && MAC_OS_X_VERSION_MIN_REQUIRED >= 101000
 #   define USE_COMMON_RANDOM 1
 # else
 #   define USE_COMMON_RANDOM 0

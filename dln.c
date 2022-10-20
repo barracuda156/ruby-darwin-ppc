@@ -303,11 +303,11 @@ COMPILER_WARNING_POP
 # define dln_disable_dlclose() false
 
 #elif !defined(MAC_OS_X_VERSION_10_11) || \
-    (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_11)
+    (MAC_OS_X_VERSION_MAX_ALLOWED < 101100)
 /* targeting older versions only */
 # define dln_disable_dlclose() true
 
-#elif MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_11
+#elif MAC_OS_X_VERSION_MIN_REQUIRED >= 101100
 /* targeting newer versions only */
 # define dln_disable_dlclose() false
 
