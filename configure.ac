@@ -54,31 +54,14 @@ AC_ARG_VAR([cxxflags], [additional CXXFLAGS (ignored when CXXFLAGS is given)])dn
 : "environment section" && {
 HAVE_BASERUBY=yes
 BASERUBY_VERSION=
+# We do not want to depend on baseruby in Macports.
 AC_ARG_WITH(baseruby,
-	AS_HELP_STRING([--with-baseruby=RUBY], [use RUBY as baseruby; RUBY is the pathname of ruby]),
-	[AS_CASE(["$withval"],
-	    [*ruby*],[BASERUBY=$withval],
-	    [no],[HAVE_BASERUBY=no],
-	    [AC_MSG_ERROR(need ruby)])
-	],
-	[
-		AC_PATH_PROG([BASERUBY], [ruby], [false])
-	])
-AS_IF([test "$HAVE_BASERUBY" != no -a "`RUBYOPT=- $BASERUBY --disable=gems -e 'print 42 if RUBY_VERSION > "2.2"' 2>/dev/null`" = 42], [
-    AS_CASE(["$build_os"], [mingw*], [
-        # Can MSys shell run a command with a drive letter?
-        RUBYOPT=- `cygpath -ma "$BASERUBY"` --disable=gems -e exit 2>/dev/null || HAVE_BASERUBY=no
-    ])
-    BASERUBY="$BASERUBY --disable=gems"
-    BASERUBY_VERSION=`$BASERUBY -v`
-    $BASERUBY -C "$srcdir" tool/downloader.rb -d tool -e gnu config.guess config.sub >&AS_MESSAGE_FD
-], [
-    HAVE_BASERUBY=no
-])
-AS_IF([test "$HAVE_BASERUBY" = no], [
-    AS_IF([test "$cross_compiling" = yes], [AC_MSG_ERROR([executable host ruby is required for cross-compiling])])
-    BASERUBY="echo executable host ruby is required.  use --with-baseruby option.; false"
-])
+	AS_HELP_STRING([--without-baseruby], [Do not use baseruby]),
+	[AS_CASE([$withval],
+	    [no],  [BASERUBY=never-use HAVE_BASERUBY=no],
+	    [yes], [],
+	    [BASERUBY=$withval])])
+AS_IF([test x"$HAVE_BASERUBY" = xyes], [command -v "$BASERUBY" > /dev/null || HAVE_BASERUBY=no])
 AC_SUBST(BASERUBY)
 AC_SUBST(HAVE_BASERUBY)
 
