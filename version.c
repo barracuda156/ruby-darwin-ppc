@@ -36,6 +36,7 @@
 #else
 # define RUBY_REVISION "HEAD"
 # define RUBY_REVISION_STR ""
+# define RUBY_API_VERSION_NAME "master"
 #endif
 #if !defined RUBY_RELEASE_DATETIME || RUBY_PATCHLEVEL != -1
 # undef RUBY_RELEASE_DATETIME
